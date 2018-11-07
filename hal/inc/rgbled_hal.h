@@ -29,9 +29,6 @@
 extern "C" {
 #endif
 
-#define LEDn                                4
-#define LED_MIRROR_SUPPORTED                0
-
 #include "rgbled_hal_impl.h"
 
 // #if MODULE_FUNCTION != MOD_FUNC_BOOTLOADER
@@ -64,4 +61,3 @@ uint16_t Get_RGB_LED_Max_Value(void);
 #endif
 
 #endif	/* RGBLED_HAL_H */
-
