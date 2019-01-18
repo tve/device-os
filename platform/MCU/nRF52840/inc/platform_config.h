@@ -24,12 +24,6 @@
 #include "platforms.h"
 #include "logging.h"
 
-// STM32 Device electronic signature
-// Factory-programmed 12 byte unique device ID
-#define         ID1          (0x1FFF7A10)
-#define         ID2          (0x1FFF7A14)
-#define         ID3          (0x1FFF7A18)
-
 #ifndef PLATFORM_ID
 #error "PLATFORM_ID not defined"
 #endif
@@ -37,11 +31,8 @@
 #define UI_TIMER_FREQUENCY                  100    /* 100Hz -> 10ms */
 #define BUTTON_DEBOUNCE_INTERVAL            (1000 / UI_TIMER_FREQUENCY)
 
-
 // QSPI Flash
-#if PLATFORM_ID == PLATFORM_ARGON || \
-    PLATFORM_ID == PLATFORM_BORON || \
-    PLATFORM_ID == PLATFORM_XENON
+#if PLATFORM_ID == PLATFORM_ARGON || PLATFORM_ID == PLATFORM_BORON ||  PLATFORM_ID == PLATFORM_XENON
 #define QSPI_FLASH_SCK_PIN                  19
 #define QSPI_FLASH_CSN_PIN                  17
 #define QSPI_FLASH_IO0_PIN                  20
@@ -57,30 +48,9 @@
 
 #define FLASH_UPDATE_MODULES
 
-//NVIC Priorities based on NVIC_PriorityGroup_4
-#define SDIO_IRQ_PRIORITY                   0       //??? BCM43362 SDIO Interrupt
-#ifdef USE_USB_OTG_FS
-#define OTG_FS_IRQ_PRIORITY                 2       //USB OTG FS Interrupt
-#define OTG_FS_WKUP_IRQ_PRIORITY            2       //USB OTG FS Wakeup Interrupt
-#elif defined USE_USB_OTG_HS
-#define OTG_HS_EP1_IN_IRQ_PRIORITY          2       //USB OTG HS EP1 IN Interrupt
-#define OTG_HS_EP1_OUT_IRQ_PRIORITY         2       //USB OTG HS EP1 OUT Interrupt
-#define OTG_HS_IRQ_PRIORITY                 2       //USB OTG HS Interrupt
-#define OTG_HS_WKUP_IRQ_PRIORITY            2       //USB OTG HS Wakeup Interrupt
-#endif
-#define RTC_Alarm_IRQ_PRIORITY              3       //RTC Alarm Interrupt
-#define RTC_WKUP_IRQ_PRIORITY               4       //RTC Seconds Interrupt
-#define USART1_IRQ_PRIORITY                 5       //USART1 Interrupt
-#define USART2_IRQ_PRIORITY                 5       //USART2 Interrupt
-#define RTC1_IRQ_PRIORITY                   5       //RTC1 Interrupt
-#define SYSTICK_IRQ_PRIORITY                13      //CORTEX_M3 Systick Interrupt
-#define SVCALL_IRQ_PRIORITY                 14      //CORTEX_M3 SVCall Interrupt
-#define PENDSV_IRQ_PRIORITY                 15      //CORTEX_M3 PendSV Interrupt
+#define SYSTICK_IRQ_PRIORITY                7       //nRF52 Systick Interrupt
 
-#define PREPSTRING2(x) #x
-#define PREPSTRING(x) PREPSTRING2(x)
-
-#if PLATFORM_ID == PLATFORM_XENON || PLATFORM_ID == PLATFORM_ARGON || PLATFORM_ID == PLATFORM_BORON
+#if PLATFORM_ID == PLATFORM_ARGON || PLATFORM_ID == PLATFORM_BORON || PLATFORM_ID == PLATFORM_XENON
     #define INTERNAL_FLASH_SIZE             (0x100000)
 #else
     #pragma message "PLATFORM_ID is " PREPSTRING(PLATFORM_ID)
