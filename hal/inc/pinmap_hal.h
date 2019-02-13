@@ -199,8 +199,7 @@ STM32_Pin_Info* HAL_Pin_Map(void);
 #define RTS         D2
 
 // WKP pin on Xenon
-#define WKP         D8   // FIXME: 
-#define A7          A5   // FIXME: A7 is used in spark_wiring_wifitester.cpp
+#define WKP         D8
 
 // TODO: Move this to a platform-specific header
 #define DEFAULT_PWM_FREQ 500 // 500Hz
