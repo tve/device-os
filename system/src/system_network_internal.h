@@ -87,7 +87,7 @@ inline void CLR_WLAN_WD() {
 #include "system_mode.h"
 #include "system_power.h"
 
-#include "ble_hal.h"
+#include "ble_hal_legacy.h"
 
 // FIXME
 #include "system_control_internal.h"
