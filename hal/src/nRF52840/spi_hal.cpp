@@ -68,8 +68,8 @@ static const nrfx_spim_t m_spim3 = NRFX_SPIM_INSTANCE(3);
 static const nrfx_spis_t m_spis2 = NRFX_SPIS_INSTANCE(2);
 
 static nrf5x_spi_info_t m_spi_map[TOTAL_SPI] = {
-    {&m_spim3, NULL, APP_IRQ_PRIORITY_HIGH, NRFX_SPIM_PIN_NOT_USED, SCK, MOSI, MISO}, // TODO: SPI3 doesn't support SPI slave mode
-    {&m_spim2, &m_spis2, APP_IRQ_PRIORITY_HIGH, NRFX_SPIM_PIN_NOT_USED, D2, D3, D4},  // TODO: Change pin number
+    {&m_spim3, NULL, APP_IRQ_PRIORITY_HIGH, PIN_INVALID, SCK, MOSI, MISO}, // TODO: SPI3 doesn't support SPI slave mode
+    {&m_spim2, &m_spis2, APP_IRQ_PRIORITY_HIGH, PIN_INVALID, D2, D3, D4},  // TODO: Change pin number
 };
 
 static void spi_master_event_handler(nrfx_spim_evt_t const * p_event, void * p_context) {
@@ -395,7 +395,7 @@ void HAL_SPI_Info(HAL_SPI_Interface spi, hal_spi_info_t* info, void* reserved) {
         info->bit_order = m_spi_map[spi].bit_order;
         info->data_mode = m_spi_map[spi].data_mode;
         if (info->version >= HAL_SPI_INFO_VERSION_2) {
-            info->ss_pin = m_spi_map[spi].ss_pin != PIN_INVALID ? NRF_PIN_LOOKUP_TABLE[m_spi_map[spi].ss_pin] : 0xffff;
+            info->ss_pin = m_spi_map[spi].ss_pin;
         }
         HAL_enable_irq(state);
     }
