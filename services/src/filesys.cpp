@@ -100,19 +100,21 @@ int32_t file_size(lfs_file_t *file){
 
 int dir_mkdir(const char *path) {
     const auto fs = filesystem_get_instance(nullptr);
+    LOG(INFO, "dir_mkdir(%s), fs=%lx", path, fs);
     CHECK_TRUE(fs, SYSTEM_ERROR_FILE);
     return lfs_mkdir(&fs->instance, path);
 }
 
 int dir_open(lfs_dir_t *dir, const char *path) {
-    //LOG(INFO, "dir_open(%s)", path);
     const auto fs = filesystem_get_instance(nullptr);
+    LOG(INFO, "dir_open(%s), fs=%lx", path, fs);
     CHECK_TRUE(fs, SYSTEM_ERROR_FILE);
     return lfs_dir_open(&fs->instance, dir, path);
 }
 
 int dir_close(lfs_dir_t *dir) {
     const auto fs = filesystem_get_instance(nullptr);
+    LOG(INFO, "dir_close(), fs=%lx", fs);
     CHECK_TRUE(fs, SYSTEM_ERROR_FILE);
     return lfs_dir_close(&fs->instance, dir);
 }
